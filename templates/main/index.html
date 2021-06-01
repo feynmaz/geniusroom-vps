@@ -1,0 +1,38 @@
+{% extends 'layout/basic.html' %}
+
+{% load thumbnail %}
+{% load static %}
+{% load bootstrap4 %}
+
+
+
+{% block content %}
+<h2 class="mb-2">Последние 10 статей</h2>
+
+{% if articles %}
+<ul class="list-unstyled">
+    {% for article in articles %}
+    <li class="media my-5 p-3 border">
+        {% url 'main:detail' rubric_pk=article.rubric.pk pk=article.pk as the_url %}
+        <a href="{{the_url}} {{ all }}">
+            {% if article.image %}
+            <img class="mr-3" src="{% thumbnail article.image 'default' %}">
+            {% else %}
+            <img class="mr-3" src="{% static 'main/empty.jpg' %}">
+            {% endif %}
+        </a>
+        <div class="media-body">
+            <h3><a href="{{ the_url }} {{ all }}">
+                    {{article.title}}
+            </a></h3>
+            <div>{{article.content|linebreaks|truncatechars:300}}</div>
+            <div class="text-right font-weight-bold characters">{{article.characters|linebreaks}}</div>
+            <p class="text-right font-italic">{{article.created_at}}</p>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+
+{% endif %}
+
+{% endblock content %}

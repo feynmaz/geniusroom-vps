@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>Уважаемый {{ author }}!</div>
+    <br>
+    <div> Пользователь {{ comment.author }} оставил комментарий на Вашу статью {{ comment.article.title }}.</div>
+    <br>
+    <div><blockquote>{{ comment.content }}</blockquote></div>
+    <br>
+    <div><a href="{{ host }}{% url 'main:profile_article_detail' pk=comment.article.pk %}">Ознакомиться</a></div>
+</body>
+</html>

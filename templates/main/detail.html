@@ -1,0 +1,59 @@
+{% extends 'layout/basic.html' %}
+
+{% load bootstrap4 %}
+
+{% block title %}
+{{ article.title}} - {{ article.rubric.name }}
+{% endblock title %}
+
+
+{% block content %}
+<div class="container-fluid mt-3">
+    <div class="row">
+        {% if article.image %}
+            <div class="col-md-auto"><a href="{% url 'main:detail_img' rubric_pk=article.rubric.pk pk=article.pk img=article.image %}"><img src="{{ article.image.url }}" class="main-image" alt="image"></a></div>
+        {% endif %}
+        <div class="col">
+            <h2>{{ article.title }}</h2>
+            <p>{{ article.content|linebreaks }}</p>
+            <br>
+            <div class="text-right font-weight-bold characters">{{ article.characters|linebreaks }}</div><br>
+            <div class="source">{{ article.source }}</div>
+            <br>
+            <p class="text-right font-italic">Добавлено {{ article.created_at }}</p>
+        </div>
+    </div>
+</div>
+{% if ais %}
+<div class="d-flex justify-content-between flex-wrap mt-5">
+    {% for ai in ais %}
+    <div>
+    <a href="{% url 'main:detail_img' rubric_pk=article.rubric.pk pk=article.pk img=ai.image %}">
+        <img class=" additional-image" src="{{ ai.image.url }}" alt="">
+    </a>
+        <p>{{ ai.caption }}</p>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+<p><a href="{% url 'main:by_rubric' pk=article.rubric.pk %}{{ all }}">Назад</a></p>
+
+    <h4 class="mt-5">Новый комментарий</h4>
+    <form action="" method="post">
+    {% csrf_token %}
+    {% bootstrap_form form layout='horizontal' %}
+    {% buttons submit='Добавить' %} {% endbuttons %}
+    </form>
+
+    {% if comments %}
+    <div class="mt-5">
+        {% for comment in comments %}
+        <div class="my-2 p-2 border">
+            <h5>{{ comment.author }}</h5>
+            <p>{{ comment.content }}</p>
+            <p class="text-right font-italic">{{ comment.created_at }}</p>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+{% endblock content %}

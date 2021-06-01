@@ -1,0 +1,39 @@
+.root {
+    font-size: larger;
+}
+
+h1 {
+    background-image: url('../bach.jpg'), url('../beethoven.jpg');
+    background-repeat: no-repeat;
+    background-position: left, right;
+    background-size: auto 100%;
+}
+
+img.additional-image {
+    width: 180px;
+}
+
+.characters{
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    font-style: italic;
+}
+
+.source{
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    font-style: italic;
+}
+
+.rubrics{
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 13px;
+    margin-bottom: 30px;
+}
+

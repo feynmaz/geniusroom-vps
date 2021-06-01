@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>Уважаемый {{ user.username }}!</div>
+    <br>
+    <div>Вы зарегистрированы на сайте Geniusroom. Для активации учетной записи пройдите по ссылке: </div>
+    <br>
+    <div><a href="{{ host }}{% url 'main:register_activate' sign=sign %}">Активировать</a></div>
+</body>
+</html>

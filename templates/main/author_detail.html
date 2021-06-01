@@ -1,0 +1,53 @@
+{% extends 'layout/basic.html' %}
+
+{% block title %}
+{{ article.title}}
+{% endblock title %}
+
+
+{% block content %}
+<div class="container-fluid mt-3">
+<h5><a href="{% url 'main:profile_article_change' pk=article.pk %}">Изменить статью</a></h5>
+    <div class="row">
+        <div class="rubrics">{{ subrubric }}</div>
+        {% if article.image %}
+        <div class="col-md-auto"><img src="{{ article.image.url }}" class="main-image"></div>
+        {% endif %}
+        <div class="col">
+            <h2>{{ article.title }}</h2>
+            <p>{{ article.content|linebreaks }}</p>
+            <br>
+            <div class="text-right font-weight-bold characters">{{ article.characters|linebreaks }}</div><br>
+            <div class="source">{{ article.source }}</div>
+            <br>
+            <p class="text-right font-italic">Добавлено {{ article.created_at }}</p>
+            <form action="{% url 'main:profile_article_delete' pk=article.pk %}" method="post">
+                {% csrf_token %}
+                <button type="submit" name="your_name" value="your_value" class="btn-link">Удалить статью</button>
+            </form>>
+        </div>
+    </div>
+</div>
+{% if ais %}
+<div class="d-flex justify-content-between flex-wrap mt-5">
+    {% for ai in ais %}
+    <div>
+        <img class="additional-image" src="{{ ai.image.url }}" alt="">
+        <p>{{ ai.caption }}</p>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% if comments %}
+<div class="mt-5">
+{% for comment in comments %}
+<div class="my-2 p-2 border">
+    <h5>{{ comment.author }}</h5>
+    <p>{{ comment.content }}</p>
+    <p class="text-right font-italic">{{ comment.created_at }}</p>
+</div>
+{% endfor %}
+</div>
+{% endif %}
+<p><a href="{% url 'main:by_rubric' pk=article.rubric.pk %}{{ all }}">Назад</a></p>
+{% endblock content %}

@@ -1,0 +1,13 @@
+{% extends 'layout/basic.html' %}
+{% load bootstrap4 %}
+
+{% block title %}
+Удаление статьи - Профиль пользователя
+{% endblock %}
+
+{% block content %}
+<div>Удалить статью не удалось</div>
+<div><a href="{% url 'main:profile' %}">Мои статьи</a></div>
+{% endblock %}
+
+
