@@ -31,19 +31,6 @@ def send_activation_notification(user):
         recipient_list=[user.email]
     )
 
-
-    #
-    # email = EmailMessage(
-    #     subject=subject,
-    #     body=body_text,
-    #     from_email=EMAIL_HOST_USER,
-    #     to=[user.email]
-    # )
-    # email.send(fail_silently=False)
-
-    # TODO: Настроить рабочую ссылку на активацию
-
-
 def get_timestamp_path(instance, filename):
     return '%s%s' % (datetime.now().timestamp(), splitext(filename)[1])
 
